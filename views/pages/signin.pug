@@ -1,0 +1,19 @@
+extends ../layout
+block headload
+  include ../includes/headload
+block head
+  include ../includes/header
+block content
+  .ui.grid
+    .four.wide.column
+    .eight.wide.column
+      form.ui.form.segment(method="post")
+        .field.required
+          label(for="name") 用户名
+          input(type="text",placeholder="用户名",name="name")
+        .field.required
+          label(for="password") 密码
+          input(placeholder="密码",type="password",name="password")
+        input.ui.button.fluid(type="submit",value="登录")
+block foot
+ include ../includes/footer

@@ -1,0 +1,39 @@
+extends ../layout
+block headload
+  include ../includes/headload
+block head
+  include ../includes/header
+block content
+  .post-content
+    .ui.grid
+      .four.wide.column
+        a(href="/posts?author="+post.author['_id'],data-title=post.author.name+"|"+({m: '男', f: '女', x: '保密'})[post.author.gender],data-content=post.author.bio).avatar.avatar-link
+          img(src="/img/"+post.author.avatar, alt="").avatar
+      .eight.wide.column
+        .ui.segment
+          h3
+            a(href="/posts/"+post._id) #{post.title}
+          pre!=post.content
+          div
+            span.tag #{post.created_at}
+            span.tag.right 
+              if post.pv
+                span 浏览(#{post.pv})
+              else
+                span 浏览(0)
+              if post.commentsCount
+                span 留言(#{post.commentsCount})
+              else
+                span 留言(0)
+              if user && post.author._id && user._id.toString()==post.author._id.toString()
+                .ui.inline.dropdown
+                  .text
+                  i.dropdown.icon
+                  .menu
+                    .item
+                      a(href="/posts/"+post._id+'/edit') 编辑
+                    .item
+                      a(href="/posts/"+post._id+'/remove') 删除
+  include ../includes/comments
+block foot
+  include ../includes/footer  

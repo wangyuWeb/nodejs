@@ -1,0 +1,21 @@
+extends ../layout
+block headload
+  include ../includes/headload
+block head
+  include ../includes/header
+block content
+  .ui.grid
+    .four.wide.column
+      a(href="/posts?author="+user._id,data-title=user.name+"|"+({m: '男', f: '女', x: '保密'})[user.gender],data-content=user.bio)
+        img(src="/img/"+user.avatar, alt="").avatar
+    .eight.wide.column
+    form.ui.form.segment(method="post",action="/posts/"+ post._id+"/edit")
+      .field.required
+        label 标题
+        input(type="text",name="title",value=post.title)
+      .field.required
+        label 内容
+        textarea(name="content", rows="15") #{post.content}
+        input(type="submit", value="发布").ui.button
+block foot
+  include ../includes/footer

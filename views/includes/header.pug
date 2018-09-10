@@ -1,0 +1,29 @@
+.nav
+  .ui.grid
+    .four.wide.column
+    .eight.wide.column
+      a(href="/posts")
+        h1=blog.title
+        p=blog.description  
+.nav-setting
+  .ui.buttons
+    .ui.floating.dropdown.button
+      i.icon.bars
+      .menu
+        if user
+          a(href="/posts?author="+user._id).item 个人主页
+          div.divider
+          a(href="/posts/create").item 发表文章
+          a(href="/signout").item 退出
+        else
+          a(href="/signin").item 登录
+          a(href="/signup").item 注册
+.ui.grid
+  .four.wide.column
+  .eight.wide.column
+    if success
+      .ui.success.message
+        p=success
+    else
+      .ui.error.message
+        p=error
